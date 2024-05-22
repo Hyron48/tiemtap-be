@@ -11,8 +11,8 @@
     <groupId>com.platinum</groupId>
     <artifactId>timetap-be</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>work-clock-be</name>
-    <description>work-clock-be</description>
+    <name>timetap-be</name>
+    <description>timetap-be</description>
     <properties>
         <java.version>17</java.version>
     </properties>
