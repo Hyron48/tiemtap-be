@@ -35,8 +35,9 @@ public class AuthController {
         return new ResponseEntity<>(authService.login(loginRequest), HttpStatus.OK);
     }
 
-    @GetMapping("/test")
-    public void test(){
-        System.out.println("work test");
+    @GetMapping("/")
+    public ResponseEntity<String> test(){
+        System.out.println("work");
+        return new ResponseEntity<>("work", HttpStatus.OK);
     }
 }
