@@ -3,10 +3,7 @@ package com.platinum.timetapbe.service;
 import com.platinum.timetapbe.config.JwtTokenConfig;
 import com.platinum.timetapbe.documents.RefreshToken;
 import com.platinum.timetapbe.documents.User;
-import com.platinum.timetapbe.dto.LoginRequest;
-import com.platinum.timetapbe.dto.LoginResponse;
-import com.platinum.timetapbe.dto.RegisterRequest;
-import com.platinum.timetapbe.dto.RegisterResponse;
+import com.platinum.timetapbe.dto.*;
 import com.platinum.timetapbe.security.CustomUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -85,16 +82,16 @@ public class AuthServiceImpl implements IAuthService {
         return loginResponse;
     }
 
-//    @Override
-//    public String refreshToken(RefreshTokenRequest refreshTokenRequest){
-//        UserDetails userDetails = refreshTokenService.getUserDetailsFromToken(refreshTokenRequest);
-//        return jwtTokenConfig.generateToken(userDetails);
-//    }
-//
-//    @Override
-//    public void logout(User user) {
-//        refreshTokenService.deleteRefreshTokenByUser(user);
-//    }
+    @Override
+    public String refreshToken(RefreshTokenRequest refreshTokenRequest){
+        UserDetails userDetails = refreshTokenService.getUserDetailsFromToken(refreshTokenRequest);
+        return jwtTokenConfig.generateToken(userDetails);
+    }
+
+    @Override
+    public void logout(User user) {
+        refreshTokenService.deleteRefreshTokenByUser(user);
+    }
 
     private void authenticate(String email, String password) throws DisabledException, BadCredentialsException {
         try {
