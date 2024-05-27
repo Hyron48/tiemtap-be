@@ -20,7 +20,7 @@ public class JwtTokenConfig {
     @Value("${jwt.secret}")
     private String secret;
 
-    public String generateToken(UserDetails userDetails){
+    public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
 
         return Jwts
@@ -33,32 +33,31 @@ public class JwtTokenConfig {
                 .compact();
     }
 
-    private <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver){
-        final Claims claims =
-                Jwts
-                        .parser()
-                        .setSigningKey(secret)
-                        .parseClaimsJws(token)
-                        .getBody();
+    private <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
+        final Claims claims = Jwts
+                .parser()
+                .setSigningKey(secret)
+                .parseClaimsJws(token)
+                .getBody();
         return claimsResolver.apply(claims);
     }
 
-    public boolean validateToken(String jwtToken, UserDetails userDetails){
+    public boolean validateToken(String jwtToken, UserDetails userDetails) {
         final String username = getUsernameFromToken(jwtToken);
 
         return username.equals(userDetails.getUsername()) && !isTokenExpired(jwtToken);
     }
 
-    public String getUsernameFromToken(String jwtToken){
+    public String getUsernameFromToken(String jwtToken) {
         return getClaimFromToken(jwtToken, Claims::getSubject);
     }
 
-    public boolean isTokenExpired(String jwtToken){
+    public boolean isTokenExpired(String jwtToken) {
         final Date expiration = getExpirationDateFromToken(jwtToken);
         return expiration.before(new Date());
     }
 
-    private Date getExpirationDateFromToken(String jwtToken){
+    private Date getExpirationDateFromToken(String jwtToken) {
         return getClaimFromToken(jwtToken, Claims::getExpiration);
     }
 }
