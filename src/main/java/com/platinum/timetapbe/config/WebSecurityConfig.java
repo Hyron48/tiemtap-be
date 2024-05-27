@@ -48,7 +48,8 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/login",
                                 "/register-user",
-                                "/register-admin")
+                                "/register-admin",
+                                "refresh-token")
                         .permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(AbstractHttpConfigurer::disable);
