@@ -1,6 +1,7 @@
 package com.platinum.timetapbe.controller;
 
 import com.platinum.timetapbe.documents.TagStamp;
+import com.platinum.timetapbe.documents.User;
 import com.platinum.timetapbe.dto.TagStampRequest;
 import com.platinum.timetapbe.service.ITagStampService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ public class TagStampController extends BaseController {
 
     @PostMapping("/tag-stamp")
     public ResponseEntity<TagStamp> registerNewTagStamp(@RequestBody TagStampRequest request) {
-        return new ResponseEntity<>(tagStampService.saveNewTagStamp(request),HttpStatus.OK);
+        User user = getLoggedId();
+        return new ResponseEntity<>(tagStampService.saveNewTagStamp(user, request),HttpStatus.OK);
     }
 }
