@@ -1,10 +1,8 @@
 package com.platinum.timetapbe.service;
 
 
-import com.platinum.timetapbe.dto.LoginRequest;
-import com.platinum.timetapbe.dto.LoginResponse;
-import com.platinum.timetapbe.dto.RegisterRequest;
-import com.platinum.timetapbe.dto.RegisterResponse;
+import com.platinum.timetapbe.documents.User;
+import com.platinum.timetapbe.dto.*;
 
 public interface IAuthService {
     RegisterResponse createUser(RegisterRequest user);
@@ -13,4 +11,7 @@ public interface IAuthService {
 
     LoginResponse login(LoginRequest loginRequest);
 
+    String refreshToken(RefreshTokenRequest refreshTokenRequest);
+
+    void logout(User user);
 }
