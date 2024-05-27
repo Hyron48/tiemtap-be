@@ -1,9 +1,6 @@
 package com.platinum.timetapbe.controller;
 
-import com.platinum.timetapbe.dto.LoginRequest;
-import com.platinum.timetapbe.dto.LoginResponse;
-import com.platinum.timetapbe.dto.RegisterRequest;
-import com.platinum.timetapbe.dto.RegisterResponse;
+import com.platinum.timetapbe.dto.*;
 import com.platinum.timetapbe.service.IAuthService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +29,10 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> loginUser(@RequestBody LoginRequest loginRequest){
         return new ResponseEntity<>(authService.login(loginRequest), HttpStatus.OK);
+    }
+
+    @PostMapping("/refresh-token")
+    public ResponseEntity<JwtResponse> refreshToken(@RequestBody RefreshTokenRequest tokenRequest){
+        return new ResponseEntity<>(new JwtResponse(authService.refreshToken(tokenRequest)), HttpStatus.OK);
     }
 }
