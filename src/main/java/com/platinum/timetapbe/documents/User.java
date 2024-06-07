@@ -54,6 +54,10 @@ public class User {
     @DBRef
     private Collection<Role> roles;
 
+    @JsonIgnore
+    @DBRef
+    private Collection<TagStamp> tagStamps;
+
     @Override
     public int hashCode() {
         return getClass().hashCode();
