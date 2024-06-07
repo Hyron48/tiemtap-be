@@ -39,7 +39,7 @@ public class TagStampServiceImpl implements ITagStampService {
     @Override
     public List<TagStamp> getTagHistory(User user) {
         Query query = new Query();
-        query.addCriteria(Criteria.where("id").is(user.getId()));
+        query.addCriteria(Criteria.where("user").is(user));
         return mongoTemplate.find(query, TagStamp.class);
     }
 }
