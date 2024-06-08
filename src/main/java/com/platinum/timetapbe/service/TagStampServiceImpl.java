@@ -5,6 +5,7 @@ import com.platinum.timetapbe.documents.User;
 import com.platinum.timetapbe.dto.TagStampRequest;
 import com.platinum.timetapbe.repository.TagStampRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -40,6 +41,7 @@ public class TagStampServiceImpl implements ITagStampService {
     public List<TagStamp> getTagHistory(User user) {
         Query query = new Query();
         query.addCriteria(Criteria.where("user").is(user));
+        query.with(Sort.by(Sort.Direction.DESC, "timeCode"));
         return mongoTemplate.find(query, TagStamp.class);
     }
 }
